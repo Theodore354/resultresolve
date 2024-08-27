@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "156281058832",
+    "project_id": "resultresolve-817a2",
+    "storage_bucket": "resultresolve-817a2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:156281058832:android:d1a5ee2adca9ff043bfc95",
+        "android_client_info": {
+          "package_name": "com.example.resultresolve"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB067_l6LKtD8YjJudNgYg3KWR8T3z2WJk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

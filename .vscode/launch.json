@@ -1,0 +1,13 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    
+    {
+      "name": "Flutter",
+      "request": "launch",
+      "type": "dart",
+      "flutterMode": "debug",
+      "timeout": 120000 // Increase timeout to 120 seconds
+    }
+  ]
+}
