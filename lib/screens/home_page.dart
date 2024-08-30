@@ -21,18 +21,30 @@ class _HomePageState extends State<HomePage> {
     'Level 100': [
       {'courseName': 'Study Skills', 'lecturerName': 'Dr. Kim'},
       {'courseName': 'African Studies', 'lecturerName': 'Dr. Davis'},
+      {'courseName': 'Computational Maths', 'lecturerName': 'Dr. Grace'},
+      {'courseName': 'Discrete Structures', 'lecturerName': 'Dr. Daniel'},
+      {'courseName': 'Sociology', 'lecturerName': 'Dr. Gifty'},
     ],
     'Level 200': [
-      {'courseName': 'Computational Maths', 'lecturerName': 'Dr. Smith'},
-      {'courseName': 'Discrete Structures', 'lecturerName': 'Dr. Johnson'},
+      {'courseName': 'African Studies', 'lecturerName': 'Dr. Smith'},
+      {'courseName': 'System Analysis', 'lecturerName': 'Dr. Johnson'},
+      {'courseName': 'Computer Architecture', 'lecturerName': 'Dr. Dennis'},
+      {'courseName': 'Operational French', 'lecturerName': 'Dr. Tabri'},
+      {'courseName': 'Database Management', 'lecturerName': 'Dr. Davis'},
     ],
     'Level 300': [
       {'courseName': 'Micro Computing', 'lecturerName': 'Prof. Williams'},
       {'courseName': 'Data Communication', 'lecturerName': 'Dr. Lewis'},
+      {'courseName': 'Mobile App Development', 'lecturerName': 'Dr. George'},
+      {'courseName': 'Accounting & Management', 'lecturerName': 'Dr. Davis'},
+      {'courseName': 'African Studies', 'lecturerName': 'Dr. Davis'},
     ],
     'Level 400': [
-      {'courseName': 'Research Methods', 'lecturerName': 'Dr. Clark'},
-      {'courseName': 'Moral and Ethics', 'lecturerName': 'Dr. Brown'},
+      {'courseName': 'Cloud Computing', 'lecturerName': 'Dr. Asunka'},
+      {'courseName': 'Project Management', 'lecturerName': 'Dr. Dominic'},
+      {'courseName': 'Social Media & Networking', 'lecturerName': 'Dr. Philomina'},
+      {'courseName': 'Management Information System', 'lecturerName': 'Dr. Dominic'},
+      {'courseName': 'E-Commerce', 'lecturerName': 'Dr. Patrick'},
     ],
   };
 
@@ -322,7 +334,8 @@ class _HomePageState extends State<HomePage> {
                   ];
 
                   return Padding(
-                    padding: const EdgeInsets.all(5.0),
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 3.0), // Reduced horizontal padding
                     child: Container(
                       height: 150,
                       width: 400,

@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 class ComplaintFormScreen extends StatefulWidget {
@@ -37,23 +38,54 @@ class _ComplaintFormScreenState extends State<ComplaintFormScreen> {
     'Level 400',
   ];
 
-  void _submitForm() {
+  void _submitForm() async {
     if (_formKey.currentState?.validate() ?? false) {
-      // Process the data or send it to the server
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Form Submitted')),
-      );
-      // Clear the form fields
-      _fullNameController.clear();
-      _indexController.clear();
-      _yearController.clear();
-      _contactController.clear();
-      _descriptionController.clear();
-      setState(() {
-        _selectedLecturer = null;
-        _selectedLevel = 'Level 100';
-        _issueStatus = 'Incomplete';
-      });
+      try {
+        // Add the complaint to Firestore
+        await FirebaseFirestore.instance.collection('complaints').add({
+          'fullName': _fullNameController.text,
+          'index': _indexController.text,
+          'year': _yearController.text,
+          'contact': _contactController.text,
+          'level': _selectedLevel,
+          'lecturer': _selectedLecturer,
+          'issueStatus': _issueStatus,
+          'description': _descriptionController.text,
+          'courseName': widget.courseName,
+          'timestamp':
+              FieldValue.serverTimestamp(), // To order the complaints by time
+        });
+
+        // Show a confirmation message
+        if (mounted) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              content: Text('Complaint Submitted Successfully'),
+              backgroundColor:
+                  Colors.green, // Optional: Set the color to green for success
+            ),
+          );
+        }
+
+        // Clear the form fields
+        _fullNameController.clear();
+        _indexController.clear();
+        _yearController.clear();
+        _contactController.clear();
+        _descriptionController.clear();
+        setState(() {
+          _selectedLecturer = null;
+          _selectedLevel = 'Level 100';
+          _issueStatus = 'Incomplete';
+        });
+      } catch (e) {
+        // Handle errors
+        if (mounted) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text('Error submitting complaint: $e')),
+          );
+        }
+      }
     }
   }
 
@@ -65,7 +97,6 @@ class _ComplaintFormScreenState extends State<ComplaintFormScreen> {
       ),
       body: SafeArea(
         child: SingleChildScrollView(
-          // To avoid overflow issues
           padding: const EdgeInsets.all(16.0),
           child: Form(
             key: _formKey,
@@ -172,7 +203,10 @@ class _ComplaintFormScreenState extends State<ComplaintFormScreen> {
                   children: [
                     Expanded(
                       child: RadioListTile<String>(
-                        title: const Text('Incomplete', style: TextStyle(fontSize:10),),
+                        title: const Text(
+                          'Incomplete',
+                          style: TextStyle(fontSize: 10),
+                        ),
                         value: 'Incomplete',
                         groupValue: _issueStatus,
                         onChanged: (value) {
@@ -184,7 +218,10 @@ class _ComplaintFormScreenState extends State<ComplaintFormScreen> {
                     ),
                     Expanded(
                       child: RadioListTile<String>(
-                        title: const Text('Absent', style: TextStyle(fontSize: 10),),
+                        title: const Text(
+                          'Absent',
+                          style: TextStyle(fontSize: 10),
+                        ),
                         value: 'Absent',
                         groupValue: _issueStatus,
                         onChanged: (value) {

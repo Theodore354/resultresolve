@@ -8,16 +8,15 @@ class LecturerLoginScreen extends StatefulWidget {
 }
 
 class _LecturerLoginScreenState extends State<LecturerLoginScreen> {
-  final TextEditingController _nameController = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
 
   Future<void> _login() async {
     if (_formKey.currentState?.validate() ?? false) {
       try {
-        // Implement your authentication logic here
-        // Example: using Firebase Auth with email and password
-        String email = '${_nameController.text.trim()}@university.com';
+        // Use the entered email and password to sign in with Firebase
+        String email = _emailController.text.trim();
         String password = _passwordController.text.trim();
 
         await FirebaseAuth.instance.signInWithEmailAndPassword(
@@ -25,6 +24,7 @@ class _LecturerLoginScreenState extends State<LecturerLoginScreen> {
           password: password,
         );
 
+        // Navigate to LecturerAdminScreen after successful login
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(builder: (context) => LecturerAdminScreen()),
@@ -51,11 +51,11 @@ class _LecturerLoginScreenState extends State<LecturerLoginScreen> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               TextFormField(
-                controller: _nameController,
-                decoration: InputDecoration(labelText: 'Name'),
+                controller: _emailController,
+                decoration: InputDecoration(labelText: 'Email'),
                 validator: (value) {
                   if (value == null || value.isEmpty) {
-                    return 'Please enter your name';
+                    return 'Please enter your email';
                   }
                   return null;
                 },
