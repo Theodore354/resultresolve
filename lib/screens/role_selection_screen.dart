@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'login_page.dart'; // Import your existing LoginPage
 import 'lecturer_login_screen.dart'; // Import the LecturerLoginScreen
+import 'AdminPage.dart'; // Import the AdminPage
 
 class RoleSelectionScreen extends StatelessWidget {
   @override
@@ -101,6 +102,16 @@ class RoleSelectionScreen extends StatelessWidget {
             ],
           ),
         ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => AdminPage()),
+          );
+        },
+        child: Icon(Icons.admin_panel_settings),
+        backgroundColor: Colors.white,
       ),
     );
   }

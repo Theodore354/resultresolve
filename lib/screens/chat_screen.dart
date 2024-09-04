@@ -26,7 +26,8 @@ class _ChatScreenState extends State<ChatScreen> {
       messages.addAll([
         {
           "sender": widget.lecturerName,
-          "text": "Welcome! How can I assist you with your ${widget.courseName} result?"
+          "text":
+              "Welcome! How can I assist you with your ${widget.courseName} result?"
         },
       ]);
     });
@@ -76,16 +77,19 @@ class _ChatScreenState extends State<ChatScreen> {
                 return Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Align(
-                    alignment: isMe ? Alignment.centerRight : Alignment.centerLeft,
+                    alignment:
+                        isMe ? Alignment.centerRight : Alignment.centerLeft,
                     child: Container(
-                      padding: EdgeInsets.symmetric(vertical: 10, horizontal: 14),
+                      padding:
+                          EdgeInsets.symmetric(vertical: 10, horizontal: 14),
                       decoration: BoxDecoration(
                         color: isMe ? Colors.blueAccent : Colors.grey[300],
                         borderRadius: BorderRadius.circular(8.0),
                       ),
                       child: Text(
                         message['text']!,
-                        style: TextStyle(color: isMe ? Colors.white : Colors.black),
+                        style: TextStyle(
+                            color: isMe ? Colors.white : Colors.black),
                       ),
                     ),
                   ),
