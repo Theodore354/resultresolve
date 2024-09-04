@@ -15,6 +15,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   final searchCourseController = TextEditingController();
+  final user = FirebaseAuth.instance.currentUser!;
 
   // Define courses based on levels
   final Map<String, List<Map<String, String>>> levelCourses = {
@@ -42,8 +43,14 @@ class _HomePageState extends State<HomePage> {
     'Level 400': [
       {'courseName': 'Cloud Computing', 'lecturerName': 'Dr. Asunka'},
       {'courseName': 'Project Management', 'lecturerName': 'Dr. Dominic'},
-      {'courseName': 'Social Media & Networking', 'lecturerName': 'Dr. Philomina'},
-      {'courseName': 'Management Information System', 'lecturerName': 'Dr. Dominic'},
+      {
+        'courseName': 'Social Media & Networking',
+        'lecturerName': 'Dr. Philomina'
+      },
+      {
+        'courseName': 'Management Information System',
+        'lecturerName': 'Dr. Dominic'
+      },
       {'courseName': 'E-Commerce', 'lecturerName': 'Dr. Patrick'},
     ],
   };
@@ -200,44 +207,47 @@ class _HomePageState extends State<HomePage> {
             ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
-              children: const [
+              children: [
                 CircleAvatar(
                   radius: 40,
                   backgroundImage: AssetImage(
-                      'assets/profile_placeholder.png'), // Add a placeholder image
+                      'lib/assets/male-profile.jpg'), // Add a placeholder image
                 ),
                 SizedBox(height: 10),
                 Text(
-                  'Your Name',
+                  'Welcome',
                   style: TextStyle(color: Colors.white, fontSize: 18),
                 ),
                 Text(
-                  'your.email@example.com',
+                  user.email! ?? 'no user',
                   style: TextStyle(color: Colors.white70, fontSize: 11),
                 ),
               ],
             ),
           ),
           ListTile(
-            leading: const Icon(Icons.edit),
-            title: const Text('Edit Profile'),
+            leading: const Icon(Icons.home),
+            title: const Text('Home'),
             onTap: () {
               // Navigate to edit profile screen
             },
           ),
           ListTile(
-            leading: const Icon(Icons.account_circle),
-            title: const Text('Account'),
+            leading: const Icon(Icons.settings),
+            title: const Text('Settings'),
             onTap: () {
               // Navigate to account settings screen
             },
           ),
-          ListTile(
-            leading: const Icon(Icons.logout),
-            title: const Text('Logout'),
-            onTap: () {
-              _logout(context); // Call the logout method
-            },
+          Padding(
+            padding: const EdgeInsets.only(bottom: 25),
+            child: ListTile(
+              leading: const Icon(Icons.logout),
+              title: const Text('Logout'),
+              onTap: () {
+                _logout(context); // Call the logout method
+              },
+            ),
           ),
         ],
       ),
